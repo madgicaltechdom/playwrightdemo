@@ -206,9 +206,7 @@ jobs:
 ## Contact
 
 For questions, support, or to contribute, please reach out via:
-- Slack: [your-slack-channel]
-- Discord: [your-discord-link]
-- Email: [your-email@example.com]
+- Email: [kapil.jain@madgicaltechdom.com]
 
 (Replace with your actual contact details.)
 

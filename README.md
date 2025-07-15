@@ -248,8 +248,6 @@ jobs:
 For questions, support, or to contribute, please reach out via:
 - Email: [kapil.jain@madgicaltechdom.com]
 
-(Replace with your actual contact details.)
-
 ## Prompt for Adding a New Feature
 
 When adding a new feature to this Playwright test suite, use the following prompt to ensure consistency and best practices:

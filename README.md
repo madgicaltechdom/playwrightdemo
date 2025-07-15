@@ -1,5 +1,23 @@
 # Playwright Test Suite for Web Application
 
+## Table of Contents
+- [Purpose](#purpose)
+- [Quick Start](#quick-start)
+- [Demo Website](#demo-website)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Best Practices](#best-practices)
+- [Running Tests](#running-tests)
+- [Adding New Features](#adding-new-features)
+- [Continuous Integration (CI) Example](#continuous-integration-ci-example)
+- [Troubleshooting](#troubleshooting)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Contact](#contact)
+- [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature)
+- [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature)
+- [Debugging Example: Checkout Positive Test Case](#debugging-example-checkout-positive-test-case)
+- [FAQ](#faq)
+
 > **Purpose:** This README is designed to help you understand how to use Playwright to generate modular, maintainable test cases. The project demonstrates these practices by utilizing a demo website (e.g., https://www.saucedemo.com).
 >
 > For more information, see the [Playwright Documentation](https://playwright.dev/).
@@ -216,4 +234,94 @@ When adding a new feature to this Playwright test suite, use the following promp
 
 ---
 
-**This prompt ensures new features are tested in a modular, maintainable, and scalable way, following the standards of this project.** 
+**This prompt ensures new features are tested in a modular, maintainable, and scalable way, following the standards of this project.**
+
+## Prompt Example for Checkout Feature
+
+When adding the checkout feature, use this prompt:
+
+---
+
+**Scenario:**
+1. Login to the website
+2. Click on the item 'Sauce Labs Backpack' for 'Add to cart' button
+3. Click on the anchor with '.shopping_cart_link'
+4. Click on the 'checkout' button
+5. Add 'First Name', 'Last Name' and 'Postal code' and click on 'Continue' button
+6. Click on 'Finish' button
+7. 'THANK YOU FOR YOUR ORDER' should be visible
+
+**Prompt:**
+Generate Playwright test cases for the 'checkout' feature, covering positive, negative, security, performance, UI/UX (including accessibility), and data-driven scenarios.
+
+- Organize tests by scenario type in separate files within `tests/checkout/` (e.g., `checkout.positive.spec.ts`, `checkout.negative.spec.ts`, etc.).
+- Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/checkout.page.ts`.
+- Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`, `getByPlaceholder`) for stability and accessibility.
+- Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
+- Assert both UI and network responses where relevant.
+- Ensure comprehensive coverage of edge cases and error handling.
+- Include accessibility checks in UI/UX tests using `axeHelper.ts`.
+- Clean up any test data after tests run (clear cookies, local storage, etc.).
+- Use clear, descriptive test names and comments.
+- Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data]) for filtering and reporting.
+- Update the README and POMs as needed.
+
+---
+
+**This prompt ensures the checkout feature is tested in a modular, maintainable, and scalable way, following the standards of this project.**
+
+## Debugging Example: Checkout Positive Test Case
+
+When the positive checkout test case failed (e.g., due to a timeout on the 'Add to cart' button), we used the following debugging steps:
+
+1. **Run in Debug Mode:**
+   - Used Playwright Inspector with:
+     ```sh
+     npx playwright test tests/checkout/checkout.positive.spec.ts --debug
+     ```
+   - This allowed us to step through the test, pause at each action, and visually inspect the page.
+
+2. **Review Selectors:**
+   - Examined the DOM and realized the original selector chain for the 'Add to cart' button was too complex and did not match the actual structure.
+   - Used Playwright’s codegen and Inspector to experiment with more resilient selectors.
+
+3. **Fix Locator Strategy:**
+   - Updated the Page Object Model to use:
+     ```ts
+     const item = this.page.locator('.inventory_item').filter({ hasText: itemName });
+     await item.getByRole('button', { name: /add to cart/i }).click();
+     ```
+   - This approach scopes the button search to the correct product card, making the test robust and maintainable.
+
+4. **Re-run and Validate:**
+   - Re-ran the test to confirm the fix and ensure the scenario passed reliably.
+
+**Tip:** Always use Playwright’s debug tools and review your selectors when a test fails due to timeouts or element not found errors. 
+
+## FAQ
+
+**Q: How do I add a new environment variable for my tests?**
+A: Add it to your `.env` file for local runs and as a secret in GitHub Actions for CI. Access it in your code via `process.env.YOUR_VARIABLE`.
+
+**Q: How do I run only failed tests?**
+A: Use Playwright's `--last-failed` flag:
+```sh
+npx playwright test --last-failed
+```
+
+**Q: Where are screenshots saved?**
+A: In the `screenshots` directory, only for failed tests by default.
+
+**Q: How do I debug a test?**
+A: Use the `--debug` flag:
+```sh
+npx playwright test <your-test-file> --debug
+```
+
+**Q: How do I update the test data or add new data-driven scenarios?**
+A: Use or extend the helpers in `tests/helpers/dataFactory.ts` and `testDataFactory.ts`.
+
+**Q: How do I contribute a new feature or scenario?**
+A: See the [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature) and [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature) sections for templates and best practices.
+
+--- 

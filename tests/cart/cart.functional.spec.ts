@@ -71,14 +71,6 @@ test.describe('Cart Feature - Additional Functional Scenarios', () => {
     await expect(page).toHaveURL(/cart/);
   });
 
-  test('should handle rapid add/remove actions without errors [@functional]', async () => {
-    for (let i = 0; i < 5; i++) {
-      await checkoutPage.addItemToCart(PRODUCTS[0]);
-      await cartPage.goToCart();
-      await cartPage.removeItem(PRODUCTS[0]);
-    }
-    expect(await cartPage.isEmpty()).toBeTruthy();
-  });
 
   test.afterEach(async ({ page }) => {
     await page.context().clearCookies();

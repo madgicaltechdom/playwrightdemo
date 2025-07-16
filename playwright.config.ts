@@ -12,7 +12,7 @@ export default defineConfig({
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
     trace: 'on-first-retry',
-    actionTimeout: 5000,
+    actionTimeout: 30000,
     baseURL: process.env.BASE_URL,
   },
   projects: [

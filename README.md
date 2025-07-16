@@ -24,7 +24,7 @@
 - [Debugging Example: Checkout Positive Test Case](#debugging-example-checkout-positive-test-case)
 - [FAQ](#faq)
 - [Example Prompt: Generate Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-playwright-test-cases-for-cart-feature-from-html)
-- [Example Prompt: Generate All Types of Functional Playwright Test Cases for Any HTML Component](#example-prompt-generate-all-types-of-functional-playwright-test-cases-for-any-html-component)
+- [Example Prompt: Generate All Types of Functional Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-all-types-of-functional-playwright-test-cases-for-cart-feature-from-html)
 
 ## Purpose
 This repository is a comprehensive, real-world example of how to use Playwright for end-to-end testing in a modular, maintainable, and scalable way.
@@ -428,18 +428,18 @@ When adding or updating the cart feature based on a new HTML component, use the 
   - Test files in `tests/cart/` for each scenario type (positive, negative, UI/UX, security, performance, data-driven)
   - Usage of resilient selectors and accessibility checks 
 
-## Example Prompt: Generate All Types of Functional Playwright Test Cases for Any HTML Component
+## Example Prompt: Generate All Types of Functional Playwright Test Cases for Cart Feature (from HTML)
 
-When you want to generate comprehensive functional Playwright test cases for any HTML component, use the following prompt. This ensures coverage of all functional scenarios and follows the best practices of this project.
+When you want to generate comprehensive functional Playwright test cases for the cart feature, use the following prompt. This ensures coverage of all functional scenarios and follows the best practices of this project.
 
 ---
 
 **Prompt:**
 
-> Generate all types of functional Playwright test cases for the following HTML component. Cover positive, negative, edge, and regression scenarios. Ensure modularity, maintainability, and best practices:
+> Generate all types of functional Playwright test cases for the following cart HTML component. Cover positive, negative, edge, and regression scenarios. Ensure modularity, maintainability, and best practices:
 >
-> - Organize tests by scenario type in separate files within `tests/<feature>/` (e.g., `<feature>.positive.spec.ts`, `<feature>.negative.spec.ts`, `<feature>.functional.spec.ts`, etc.).
-> - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/`.
+> - Organize tests by scenario type in separate files within `tests/cart/` (e.g., `cart.positive.spec.ts`, `cart.negative.spec.ts`, `cart.functional.spec.ts`, etc.).
+> - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/cart.page.ts`.
 > - Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`) for stability and accessibility.
 > - Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
 > - Assert both UI and network responses where relevant.
@@ -450,19 +450,26 @@ When you want to generate comprehensive functional Playwright test cases for any
 >
 > **HTML:**
 > ```html
-> <!-- Paste your HTML snippet here -->
-> <form id="login-form">
->   <label for="username">Username</label>
->   <input id="username" name="username" type="text" required />
->   <label for="password">Password</label>
->   <input id="password" name="password" type="password" required />
->   <button type="submit">Login</button>
-> </form>
+> <div id="cart">
+>   <h2>Shopping Cart</h2>
+>   <ul id="cart-items">
+>     <li data-testid="cart-item">
+>       <span class="item-name">Sauce Labs Backpack</span>
+>       <span class="item-qty">1</span>
+>       <button aria-label="Remove item" data-testid="remove-item">Remove</button>
+>     </li>
+>     <!-- More items... -->
+>   </ul>
+>   <div id="cart-summary">
+>     <span id="total-label">Total:</span>
+>     <span id="total-amount">$29.99</span>
+>   </div>
+>   <button id="checkout" aria-label="Checkout">Checkout</button>
+> </div>
 > ```
 
 ---
 
 **How to use:**
-- Replace the HTML snippet with your own component or feature markup.
-- Adjust the `<feature>` placeholder to match your feature name (e.g., `login`, `checkout`).
-- Submit this prompt to your AI tool to generate modular, best-practice Playwright functional test cases and POMs. 
+- Adjust the cart HTML snippet as needed to match your actual component.
+- Submit this prompt to your AI tool to generate modular, best-practice Playwright functional test cases and a POM for the cart feature. 

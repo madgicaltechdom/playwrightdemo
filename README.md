@@ -417,9 +417,6 @@ When the positive checkout test case failed (e.g., due to a timeout on the 'Add 
 **Tip:** Always use Playwright’s debug tools and review your selectors when a test fails due to timeouts or element not found errors. 
 
 
-**Q: How were many of these tests and best practices generated or refactored?**
-A: We used Playwright MCP (Microsoft CodePilot) for AI-assisted test generation, refactoring, and debugging, ensuring rapid and consistent adoption of best practices. You can use **Cursor**, **Windsurf**, or any compatible tool that supports MCP for similar workflows. 
-
 ## Example Prompt: Generate Playwright Test Cases for Cart Feature (from HTML)
 
 When adding or updating the cart feature based on a new HTML component, use the following prompt to generate comprehensive Playwright test cases and Page Object Models:
@@ -565,6 +562,9 @@ A: Use or extend the helpers in `tests/helpers/dataFactory.ts` and `testDataFact
 
 **Q: How do I contribute a new feature or scenario?**
 A: See the [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature) and [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature) sections for templates and best practices.
+
+**Q: How were many of these tests and best practices generated or refactored?**
+A: We used Playwright MCP (Microsoft CodePilot) for AI-assisted test generation, refactoring, and debugging, ensuring rapid and consistent adoption of best practices. You can use **Cursor**, **Windsurf**, or any compatible tool that supports MCP for similar workflows. 
 
 --- 
 

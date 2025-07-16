@@ -87,13 +87,31 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 │   │   ├── cart.data.spec.ts            # Data-driven cart scenarios
 │   │   ├── cart.functional.spec.ts      # Additional functional cart scenarios
 │   ├── login/
+│   │   ├── login.positive.spec.ts       # Positive login scenarios
+│   │   ├── login.negative.spec.ts       # Negative login scenarios
+│   │   ├── login.security.spec.ts       # Security login scenarios
+│   │   ├── login.performance.spec.ts    # Performance login scenarios
+│   │   ├── login.uiux.spec.ts           # UI/UX & accessibility login scenarios
 │   ├── checkout/
+│   │   ├── checkout.positive.spec.ts    # Positive checkout scenarios
+│   │   ├── checkout.negative.spec.ts    # Negative checkout scenarios
+│   │   ├── checkout.security.spec.ts    # Security checkout scenarios
+│   │   ├── checkout.performance.spec.ts # Performance checkout scenarios
+│   │   ├── checkout.uiux.spec.ts        # UI/UX & accessibility checkout scenarios
+│   │   ├── checkout.data.spec.ts        # Data-driven checkout scenarios
 │   ├── page-objects/
+│   │   ├── cart.page.ts                 # Page Object Model for cart
+│   │   ├── login.page.ts                # Page Object Model for login
+│   │   ├── checkout.page.ts             # Page Object Model for checkout
 │   ├── helpers/
-│   ├── baseTest.ts
-├── playwright.config.ts
-├── package.json
-├── .env
+│   │   ├── testDataFactory.ts           # Shared test data factory
+│   │   ├── axeHelper.ts                 # Accessibility helper (axe-core)
+│   │   ├── networkHelper.ts             # Network assertion helper
+│   │   ├── dataFactory.ts               # Random data factory
+│   ├── baseTest.ts                      # Custom base test with global hooks
+├── playwright.config.ts                 # Playwright configuration
+├── package.json                         # Project dependencies
+├── .env                                 # Environment variables (not committed)
 ```
 
 ## Setup

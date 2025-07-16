@@ -25,6 +25,7 @@
 - [FAQ](#faq)
 - [Example Prompt: Generate Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-playwright-test-cases-for-cart-feature-from-html)
 - [Example Prompt: Generate All Types of Functional Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-all-types-of-functional-playwright-test-cases-for-cart-feature-from-html)
+- [Visual Regression Testing](#visual-regression-testing)
 
 ## Purpose
 This repository is a comprehensive, real-world example of how to use Playwright for end-to-end testing in a modular, maintainable, and scalable way.
@@ -141,6 +142,42 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 - **Global Hooks:** Use `baseTest.ts` for global hooks (e.g., screenshots on failure).
 - **Screenshots:** Screenshots are automatically taken on test failure and saved in the `screenshots` directory.
 - **TypeScript Strict Mode:** Enabled for better type safety.
+
+## Visual Regression Testing
+
+Playwright supports visual regression testing using the `toMatchSnapshot` assertion. This allows you to compare screenshots or text content of pages and elements to previously saved snapshots, helping you catch unintended UI changes.
+
+### How to Use
+
+**Full-page snapshot:**
+```ts
+expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('cart-page.png');
+```
+
+**Element snapshot:**
+```ts
+const cartSection = page.locator('#cart_contents_container');
+expect(await cartSection.screenshot()).toMatchSnapshot('cart-section.png');
+```
+
+**Text snapshot:**
+```ts
+const summaryText = await page.locator('#cart_summary_container, #cart_contents_container').textContent();
+expect(summaryText).toMatchSnapshot('cart-summary.txt');
+```
+
+### Updating Snapshots
+If your UI changes intentionally, update the snapshots with:
+```sh
+npx playwright test --update-snapshots
+```
+
+### Best Practices
+- Ensure the UI is stable (no animations or dynamic content) before taking snapshots.
+- Use descriptive snapshot names.
+- Review diffs carefully before updating snapshots.
+
+For more, see the [Playwright snapshot testing docs](https://playwright.dev/docs/test-snapshots).
 
 ## Running Tests
 
@@ -266,7 +303,7 @@ When adding a new feature to this Playwright test suite, use the following promp
 
 ---
 
-**Generate Playwright test cases for the '<feature>' feature, covering positive, negative, security, performance, UI/UX (including accessibility), and data-driven scenarios.**
+**Generate Playwright test cases for the '<feature>' feature, covering positive, negative, security, performance, UI/UX (including accessibility), visual regression, and data-driven scenarios.**
 
 - Organize tests by scenario type in separate files within `tests/<feature>/` (e.g., `<feature>.positive.spec.ts`, `<feature>.negative.spec.ts`, etc.).
 - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/`.
@@ -275,9 +312,10 @@ When adding a new feature to this Playwright test suite, use the following promp
 - Assert both UI and network responses where relevant.
 - Ensure comprehensive coverage of edge cases and error handling.
 - Include accessibility checks in UI/UX tests.
+- Include visual regression tests using `toMatchSnapshot` for key pages and components.
 - Clean up any test data after tests run (clear cookies, local storage, etc.).
 - Use clear, descriptive test names and comments.
-- Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data]) for filtering and reporting.
+- Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@visual], [@data]) for filtering and reporting.
 - Update the README and POMs as needed.
 
 ---
@@ -300,7 +338,7 @@ When adding the checkout feature, use this prompt:
 7. 'THANK YOU FOR YOUR ORDER' should be visible
 
 **Prompt:**
-Generate Playwright test cases for the 'checkout' feature, covering positive, negative, security, performance, UI/UX (including accessibility), and data-driven scenarios.
+Generate Playwright test cases for the 'checkout' feature, covering positive, negative, security, performance, UI/UX (including accessibility), visual regression, and data-driven scenarios.
 
 - Organize tests by scenario type in separate files within `tests/checkout/` (e.g., `checkout.positive.spec.ts`, `checkout.negative.spec.ts`, etc.).
 - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/checkout.page.ts`.
@@ -309,9 +347,10 @@ Generate Playwright test cases for the 'checkout' feature, covering positive, ne
 - Assert both UI and network responses where relevant.
 - Ensure comprehensive coverage of edge cases and error handling.
 - Include accessibility checks in UI/UX tests using `axeHelper.ts`.
+- Include visual regression tests using `toMatchSnapshot` for key pages and components.
 - Clean up any test data after tests run (clear cookies, local storage, etc.).
 - Use clear, descriptive test names and comments.
-- Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data]) for filtering and reporting.
+- Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@visual], [@data]) for filtering and reporting.
 - Update the README and POMs as needed.
 
 ---
@@ -385,7 +424,7 @@ When adding or updating the cart feature based on a new HTML component, use the 
 
 **Prompt:**
 
-> Generate Playwright test cases for the following **cart** HTML component, covering positive, negative, security, performance, UI/UX (including accessibility), and data-driven scenarios.
+> Generate Playwright test cases for the following **cart** HTML component, covering positive, negative, security, performance, UI/UX (including accessibility), visual regression, and data-driven scenarios.
 >
 > - Organize tests by scenario type in separate files within `tests/cart/` (e.g., `cart.positive.spec.ts`, `cart.negative.spec.ts`, etc.).
 > - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/cart.page.ts`.
@@ -394,9 +433,10 @@ When adding or updating the cart feature based on a new HTML component, use the 
 > - Assert both UI and network responses where relevant.
 > - Ensure comprehensive coverage of edge cases and error handling.
 > - Include accessibility checks in UI/UX tests.
+> - Include visual regression tests using `toMatchSnapshot` for key pages and components.
 > - Clean up any test data after tests run (clear cookies, local storage, etc.).
 > - Use clear, descriptive test names and comments.
-> - Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data]) for filtering and reporting.
+> - Tag tests (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@visual], [@data]) for filtering and reporting.
 > - Update the README and POMs as needed.
 >
 > **HTML:**

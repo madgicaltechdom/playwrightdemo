@@ -1,9 +1,26 @@
 
-# Playwright
+# Node
 node_modules/
+.env
+
+# Playwright test artifacts
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-.env
 /screenshots/
+
+# Playwright snapshots (all .spec.ts-snapshots folders)
+**/*.spec.ts-snapshots/
+
+# Ignore all PNG and TXT snapshots
+**/*.spec.ts-snapshots/*.png
+**/*.spec.ts-snapshots/*.txt
+
+# OS/Editor junk
+.DS_Store
+*.log
+
+# Do NOT ignore project files
+# (Removed: README.md)
+

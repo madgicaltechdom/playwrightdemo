@@ -78,31 +78,22 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 ```
 .
 ├── tests/
+│   ├── cart/
+│   │   ├── cart.positive.spec.ts        # Positive (functional) cart scenarios
+│   │   ├── cart.negative.spec.ts        # Negative/edge cart scenarios
+│   │   ├── cart.uiux.spec.ts            # UI/UX & accessibility cart scenarios
+│   │   ├── cart.security.spec.ts        # Security cart scenarios
+│   │   ├── cart.performance.spec.ts     # Performance cart scenarios
+│   │   ├── cart.data.spec.ts            # Data-driven cart scenarios
+│   │   ├── cart.functional.spec.ts      # Additional functional cart scenarios
 │   ├── login/
-│   │   ├── login.positive.spec.ts      # Positive (successful login) scenarios
-│   │   ├── login.negative.spec.ts      # Negative (invalid login) scenarios
-│   │   ├── login.security.spec.ts      # Security-related scenarios
-│   │   ├── login.performance.spec.ts   # Performance scenarios
-│   │   ├── login.uiux.spec.ts          # UI/UX and accessibility scenarios
 │   ├── checkout/
-│   │   ├── checkout.positive.spec.ts   # Positive checkout scenarios
-│   │   ├── checkout.negative.spec.ts   # Negative checkout scenarios
-│   │   ├── checkout.security.spec.ts   # Security checkout scenarios
-│   │   ├── checkout.performance.spec.ts# Performance checkout scenarios
-│   │   ├── checkout.uiux.spec.ts       # UI/UX and accessibility checkout
-│   │   ├── checkout.data.spec.ts       # Data-driven checkout scenarios
 │   ├── page-objects/
-│   │   ├── login.page.ts               # Page Object Model for login
-│   │   ├── checkout.page.ts            # Page Object Model for checkout
 │   ├── helpers/
-│   │   ├── testDataFactory.ts          # Shared test data factory
-│   │   ├── axeHelper.ts                # Accessibility helper (axe-core)
-│   │   ├── networkHelper.ts            # Network assertion helper
-│   │   ├── dataFactory.ts              # Random data factory
-│   ├── baseTest.ts                     # Custom base test with global hooks
-├── playwright.config.ts                # Playwright configuration
-├── package.json                        # Project dependencies
-├── .env                                # Environment variables (not committed)
+│   ├── baseTest.ts
+├── playwright.config.ts
+├── package.json
+├── .env
 ```
 
 ## Setup
@@ -119,13 +110,14 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 
 ## Best Practices
 
+- **Comprehensive Functional Coverage:** The cart feature includes positive, negative, UI/UX, security, performance, data-driven, and additional functional test cases for robust validation.
 - **Modular Test Files:** Organize tests by scenario type for clarity and maintainability.
 - **Page Object Model:** Encapsulate all UI interactions in POMs using resilient selectors (`getByRole`, `getByLabel`, `getByTestId`).
 - **Test Data Management:** Use shared helpers and factories; avoid hardcoded sensitive data.
 - **Assertions:** Assert both UI and network responses where relevant. Use helpers like `expectApiResponse` for network checks.
 - **Accessibility:** Use the `axeHelper.ts` for automated accessibility checks in UI/UX tests.
 - **Test Hygiene:** Clean up test data after each test (clear cookies, local storage, etc.).
-- **Tags:** Use tags (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data]) in test titles for filtering and reporting.
+- **Tags:** Use tags (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data], [@functional]) in test titles for filtering and reporting.
 - **Global Hooks:** Use `baseTest.ts` for global hooks (e.g., screenshots on failure).
 - **Screenshots:** Screenshots are automatically taken on test failure and saved in the `screenshots` directory.
 - **TypeScript Strict Mode:** Enabled for better type safety.

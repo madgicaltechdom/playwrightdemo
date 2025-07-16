@@ -22,10 +22,10 @@
 - [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature)
 - [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature)
 - [Debugging Example: Checkout Positive Test Case](#debugging-example-checkout-positive-test-case)
-- [FAQ](#faq)
 - [Example Prompt: Generate Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-playwright-test-cases-for-cart-feature-from-html)
 - [Example Prompt: Generate All Types of Functional Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-all-types-of-functional-playwright-test-cases-for-cart-feature-from-html)
 - [Visual Regression Testing](#visual-regression-testing)
+- [FAQ](#faq)
 
 ## Purpose
 This repository is a comprehensive, real-world example of how to use Playwright for end-to-end testing in a modular, maintainable, and scalable way.
@@ -41,6 +41,10 @@ This repository is a comprehensive, real-world example of how to use Playwright 
 - The project is designed for easy extension and team collaboration, making it ideal for both learning and real-world adoption.
 
 For more information, see the [Playwright Documentation](https://playwright.dev/).
+
+## Who is this for?
+
+This project is for QA engineers, developers, and open source contributors who want a robust, scalable, and maintainable Playwright test suite for web applications. It is suitable for both beginners and experienced automation engineers.
 
 ## Quick Start
 
@@ -70,11 +74,9 @@ For more information, see the [Playwright Documentation](https://playwright.dev/
 
 This project uses [SauceDemo](https://www.saucedemo.com) as the demo application for all test case demonstrations. You can use any similar public demo site for your own practice.
 
-<!--
 ## Screenshots or GIFs
 
-Consider adding screenshots or GIFs of tests running here for visual learners.
--->
+![Test Run Example](./screenshots/example-test-run.gif)
 
 ## Project Structure
 
@@ -89,6 +91,7 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 │   │   ├── cart.performance.spec.ts     # Performance cart scenarios
 │   │   ├── cart.data.spec.ts            # Data-driven cart scenarios
 │   │   ├── cart.functional.spec.ts      # Additional functional cart scenarios
+│   │   ├── cart.visual.spec.ts          # Visual regression cart scenarios
 │   ├── login/
 │   │   ├── login.positive.spec.ts       # Positive login scenarios
 │   │   ├── login.negative.spec.ts       # Negative login scenarios
@@ -117,6 +120,10 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 ├── .env                                 # Environment variables (not committed)
 ```
 
+**Example Test Files:**
+- [Cart Positive Test](./tests/cart/cart.positive.spec.ts)
+- [Cart Visual Regression Test](./tests/cart/cart.visual.spec.ts)
+
 ## Setup
 
 1. **Install dependencies:**
@@ -129,6 +136,14 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 
 3. **Environment variables are loaded automatically in tests and helpers.**
 
+### Required Environment Variables
+
+| Variable         | Purpose                        | Example Value              |
+|------------------|-------------------------------|---------------------------|
+| BASE_URL         | Base URL for the app           | https://www.saucedemo.com |
+| LOGIN_USERNAME   | Login username for tests       | standard_user             |
+| LOGIN_PASSWORD   | Login password for tests       | secret_sauce              |
+
 ## Best Practices
 
 - **Comprehensive Functional Coverage:** The cart feature includes positive, negative, UI/UX, security, performance, data-driven, and additional functional test cases for robust validation.
@@ -136,9 +151,17 @@ Consider adding screenshots or GIFs of tests running here for visual learners.
 - **Page Object Model:** Encapsulate all UI interactions in POMs using resilient selectors (`getByRole`, `getByLabel`, `getByTestId`).
 - **Test Data Management:** Use shared helpers and factories; avoid hardcoded sensitive data.
 - **Assertions:** Assert both UI and network responses where relevant. Use helpers like `expectApiResponse` for network checks.
-- **Accessibility:** Use the `axeHelper.ts` for automated accessibility checks in UI/UX tests.
+- **Accessibility:** Use the `axeHelper.ts` for automated accessibility checks in UI/UX tests. For manual accessibility checks, consider using browser plugins like [axe DevTools](https://www.deque.com/axe/devtools/) or [WAVE](https://wave.webaim.org/).
 - **Test Hygiene:** Clean up test data after each test (clear cookies, local storage, etc.).
-- **Tags:** Use tags (e.g., [@smoke], [@regression], [@security], [@ui], [@performance], [@data], [@functional]) in test titles for filtering and reporting.
+- **Tags:** Use tags in test titles for filtering and reporting. Common tags:
+  - [@smoke]: Critical path/smoke tests
+  - [@regression]: Regression suite
+  - [@security]: Security-related scenarios
+  - [@ui]: UI/UX scenarios
+  - [@performance]: Performance checks
+  - [@visual]: Visual regression tests
+  - [@data]: Data-driven scenarios
+  - [@functional]: Functional scenarios
 - **Global Hooks:** Use `baseTest.ts` for global hooks (e.g., screenshots on failure).
 - **Screenshots:** Screenshots are automatically taken on test failure and saved in the `screenshots` directory.
 - **TypeScript Strict Mode:** Enabled for better type safety.
@@ -292,6 +315,14 @@ jobs:
 
 ---
 
+## Extending the Framework
+
+- Add new helpers in `tests/helpers/` for shared logic.
+- Create new Page Object Models in `tests/page-objects/` for new features.
+- Integrate with other tools (e.g., Allure, Percy) by following their Playwright setup guides.
+
+---
+
 ## Contact
 
 For questions, support, or to contribute, please reach out via:
@@ -385,33 +416,6 @@ When the positive checkout test case failed (e.g., due to a timeout on the 'Add 
 
 **Tip:** Always use Playwright’s debug tools and review your selectors when a test fails due to timeouts or element not found errors. 
 
-## FAQ
-
-**Q: How do I add a new environment variable for my tests?**
-A: Add it to your `.env` file for local runs and as a secret in GitHub Actions for CI. Access it in your code via `process.env.YOUR_VARIABLE`.
-
-**Q: How do I run only failed tests?**
-A: Use Playwright's `--last-failed` flag:
-```sh
-npx playwright test --last-failed
-```
-
-**Q: Where are screenshots saved?**
-A: In the `screenshots` directory, only for failed tests by default.
-
-**Q: How do I debug a test?**
-A: Use the `--debug` flag:
-```sh
-npx playwright test <your-test-file> --debug
-```
-
-**Q: How do I update the test data or add new data-driven scenarios?**
-A: Use or extend the helpers in `tests/helpers/dataFactory.ts` and `testDataFactory.ts`.
-
-**Q: How do I contribute a new feature or scenario?**
-A: See the [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature) and [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature) sections for templates and best practices.
-
---- 
 
 **Q: How were many of these tests and best practices generated or refactored?**
 A: We used Playwright MCP (Microsoft CodePilot) for AI-assisted test generation, refactoring, and debugging, ensuring rapid and consistent adoption of best practices. You can use **Cursor**, **Windsurf**, or any compatible tool that supports MCP for similar workflows. 
@@ -513,3 +517,66 @@ When you want to generate comprehensive functional Playwright test cases for the
 **How to use:**
 - Adjust the cart HTML snippet as needed to match your actual component.
 - Submit this prompt to your AI tool to generate modular, best-practice Playwright functional test cases and a POM for the cart feature. 
+
+
+## How to Add or Update a Prompt Template
+
+1. Copy an existing prompt section as a starting point.
+2. Update the feature name, scenario types, and any specific requirements.
+3. Place the new prompt in the README under the prompt sections.
+4. Add an entry to the Table of Contents for easy access.
+
+## Accessibility Statement
+
+We are committed to accessibility in both our application and our test suite. Automated accessibility checks are included, and we encourage manual checks using tools like axe DevTools and WAVE. Please report any accessibility issues or suggestions.
+
+## Common Pitfalls
+
+> **Tip:** Always check that your `.env` file is present and correctly configured before running tests.
+> **Warning:** Never commit real credentials or sensitive data to version control.
+
+- **Missing environment variables:** Ensure all required variables are set (see Setup).
+- **Snapshot mismatches:** Review diffs carefully before updating snapshots.
+- **Selector flakiness:** Use resilient selectors and Playwright codegen for best results.
+- **Test data pollution:** Clean up cookies and local storage after each test.
+
+## FAQ
+
+**Q: How do I add a new environment variable for my tests?**
+A: Add it to your `.env` file for local runs and as a secret in GitHub Actions for CI. Access it in your code via `process.env.YOUR_VARIABLE`.
+
+**Q: How do I run only failed tests?**
+A: Use Playwright's `--last-failed` flag:
+```sh
+npx playwright test --last-failed
+```
+
+**Q: Where are screenshots saved?**
+A: In the `screenshots` directory, only for failed tests by default.
+
+**Q: How do I debug a test?**
+A: Use the `--debug` flag:
+```sh
+npx playwright test <your-test-file> --debug
+```
+
+**Q: How do I update the test data or add new data-driven scenarios?**
+A: Use or extend the helpers in `tests/helpers/dataFactory.ts` and `testDataFactory.ts`.
+
+**Q: How do I contribute a new feature or scenario?**
+A: See the [Prompt for Adding a New Feature](#prompt-for-adding-a-new-feature) and [Prompt Example for Checkout Feature](#prompt-example-for-checkout-feature) sections for templates and best practices.
+
+--- 
+
+## Release Notes
+
+- v1.0.0: Initial release with modular structure, POMs, visual regression, and CI/CD.
+- v1.1.0: Added accessibility helpers, prompt templates, and improved documentation.
+
+## Related Projects
+
+- [Playwright Documentation](https://playwright.dev/)
+- [Allure Playwright Integration](https://docs.qameta.io/allure-playwright/)
+- [axe-core Accessibility Testing](https://github.com/dequelabs/axe-core)
+
+--- 

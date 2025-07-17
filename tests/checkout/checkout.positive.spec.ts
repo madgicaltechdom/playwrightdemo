@@ -3,7 +3,6 @@ import { LoginPage } from '../page-objects/login.page';
 import { CheckoutPage } from '../page-objects/checkout.page';
 import { CartPage } from '../page-objects/cart.page';
 import { getValidLoginCredentials, getValidCheckoutInfo } from '../helpers/testDataFactory';
-import { expectApiResponse } from '../helpers/networkHelper';
 
 test.describe('Checkout Feature - Positive Scenarios', () => {
     let loginPage: LoginPage;

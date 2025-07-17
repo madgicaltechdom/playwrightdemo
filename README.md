@@ -35,7 +35,7 @@ This repository is a comprehensive, real-world example of how to use Playwright 
   - Organize tests for clarity and scalability
   - Use and extend Page Object Models
   - Implement data-driven and accessibility tests
-  - Assert on both UI and network responses
+  - Assert UI responses and visible state. Focus on user-facing flows and UI validation.
   - Integrate with GitHub Actions and manage environments securely
   - Debug and maintain a professional-grade test suite
 - The project is designed for easy extension and team collaboration, making it ideal for both learning and real-world adoption.
@@ -150,7 +150,7 @@ This project uses [SauceDemo](https://www.saucedemo.com) as the demo application
 - **Modular Test Files:** Organize tests by scenario type for clarity and maintainability.
 - **Page Object Model:** Encapsulate all UI interactions in POMs using resilient selectors (`getByRole`, `getByLabel`, `getByTestId`).
 - **Test Data Management:** Use shared helpers and factories; avoid hardcoded sensitive data.
-- **Assertions:** Assert both UI and network responses where relevant. Use helpers like `expectApiResponse` for network checks.
+- **Assertions:** Assert UI responses and visible state. Focus on user-facing flows and UI validation.
 - **Accessibility:** Use the `axeHelper.ts` for automated accessibility checks in UI/UX tests. For manual accessibility checks, consider using browser plugins like [axe DevTools](https://www.deque.com/axe/devtools/) or [WAVE](https://wave.webaim.org/).
 - **Test Hygiene:** Clean up test data after each test (clear cookies, local storage, etc.).
 - **Tags:** Use tags in test titles for filtering and reporting. Common tags:
@@ -340,7 +340,7 @@ When adding a new feature to this Playwright test suite, use the following promp
 - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/`.
 - Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`) for stability and accessibility.
 - Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
-- Assert both UI and network responses where relevant.
+- Assert UI responses and visible state. Focus on user-facing flows and UI validation.
 - Ensure comprehensive coverage of edge cases and error handling.
 - Include accessibility checks in UI/UX tests.
 - Include visual regression tests using `toMatchSnapshot` for key pages and components.
@@ -375,7 +375,7 @@ Generate Playwright test cases for the 'checkout' feature, covering positive, ne
 - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/checkout.page.ts`.
 - Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`, `getByPlaceholder`) for stability and accessibility.
 - Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
-- Assert both UI and network responses where relevant.
+- Assert UI responses and visible state. Focus on user-facing flows and UI validation.
 - Ensure comprehensive coverage of edge cases and error handling.
 - Include accessibility checks in UI/UX tests using `axeHelper.ts`.
 - Include visual regression tests using `toMatchSnapshot` for key pages and components.
@@ -431,7 +431,7 @@ When adding or updating the cart feature based on a new HTML component, use the 
 > - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/cart.page.ts`.
 > - Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`) for stability and accessibility.
 > - Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
-> - Assert both UI and network responses where relevant.
+> - Assert UI responses and visible state. Focus on user-facing flows and UI validation.
 > - Ensure comprehensive coverage of edge cases and error handling.
 > - Include accessibility checks in UI/UX tests.
 > - Include visual regression tests using `toMatchSnapshot` for key pages and components.
@@ -483,7 +483,7 @@ When you want to generate comprehensive functional Playwright test cases for the
 > - Use the Page Object Model for all UI interactions, placing POMs in `tests/page-objects/cart.page.ts`.
 > - Prefer resilient selectors (`getByRole`, `getByLabel`, `getByTestId`) for stability and accessibility.
 > - Use shared helpers and test data factories for setup and data management; avoid hardcoded data.
-> - Assert both UI and network responses where relevant.
+> - Assert UI responses and visible state. Focus on user-facing flows and UI validation.
 > - Ensure comprehensive coverage of edge cases and error handling.
 > - Use clear, descriptive test names and comments.
 > - Tag tests (e.g., [@smoke], [@regression], [@functional]) for filtering and reporting.

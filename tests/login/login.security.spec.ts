@@ -18,11 +18,9 @@ test.describe('Login Feature - Security Scenarios', () => {
     // await expect(page.getByTestId('lockout-message')).toBeVisible();
   });
 
-  test('should not expose sensitive data in UI or network [@security]', async ({ page }) => {
+  test('should not expose sensitive data in UI [@security]', async ({ page }) => {
     await expect(loginPage.passwordInput).toHaveAttribute('type', 'password');
-    // Optionally, check network requests for sensitive data
-    // const requests = await page.context().storageState();
-    // expect(requests.cookies).not.toContain('password');
+    // Optionally, check UI for sensitive data
   });
 
   test.afterEach(async ({ page }) => {

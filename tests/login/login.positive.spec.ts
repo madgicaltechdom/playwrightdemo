@@ -14,12 +14,7 @@ test.describe('Login Feature - Positive Scenarios', () => {
     const { username, password } = getValidLoginCredentials();
     await loginPage.login(username, password);
     await loginPage.assertLoginSuccess();
-    // Optionally assert network response for login API
-    // const [response] = await Promise.all([
-    //   page.waitForResponse('**/login'),
-    //   loginPage.login(username, password),
-    // ]);
-    // expect(response.ok()).toBeTruthy();
+    // Optionally assert UI state for login
   });
 
   test.afterEach(async ({ page }) => {

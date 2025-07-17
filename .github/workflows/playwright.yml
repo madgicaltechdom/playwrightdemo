@@ -24,7 +24,7 @@ jobs:
         BASE_URL: ${{ secrets.BASE_URL }}
         LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
         LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report

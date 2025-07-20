@@ -25,6 +25,7 @@
 - [Example Prompt: Generate Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-playwright-test-cases-for-cart-feature-from-html)
 - [Example Prompt: Generate All Types of Functional Playwright Test Cases for Cart Feature (from HTML)](#example-prompt-generate-all-types-of-functional-playwright-test-cases-for-cart-feature-from-html)
 - [Visual Regression Testing](#visual-regression-testing)
+- [Video Demo](#video-demo)
 - [FAQ](#faq)
 
 ## Purpose
@@ -536,6 +537,10 @@ We are committed to accessibility in both our application and our test suite. Au
 - **Snapshot mismatches:** Review diffs carefully before updating snapshots.
 - **Selector flakiness:** Use resilient selectors and Playwright codegen for best results.
 - **Test data pollution:** Clean up cookies and local storage after each test.
+
+## Video Demo
+You may refer to this demo video of Playwright and its MCP that covers how to utilize it.
+[Drive Link Here](https://drive.google.com/file/d/1MD_tlJt22YTRn_5gp8AaeAIrSRXpXDdF/view?usp=sharing)
 
 ## FAQ
 
